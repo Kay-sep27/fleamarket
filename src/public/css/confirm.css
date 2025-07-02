@@ -1,15 +1,16 @@
 .header {
-    background: #000;
+    background: #00bfff;
 }
 
 .header__inner {
     margin: 0 auto;
     padding: 20px 15px;
     max-width: 1230px;
+    text-align: center;
 }
 
 .header__logo {
-    color: #fff;
+    color: #ffff00;
     text-decoration: none;
     font-weight: bold;
     font-size: 24px;
@@ -43,7 +44,7 @@
     padding: 15px;
     width: 20%;
     border-bottom: 1px solid #ddd;
-    background-color: #eee;
+    background-color: #f0f8ff;
     font-weight: bold;
 }
 
@@ -68,13 +69,31 @@
     text-align: center;
 }
 
+.form__button-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    /* ボタン間の隙間 */
+    margin-top: 30px;
+}
+
 .form__button-submit {
     padding: 10px;
-    width: 30%;
+    width: 150px;
     height: 50px;
     border: none;
     border-radius: 3px;
-    background: #000;
+    background: #00bfff;
     color: #fff;
     cursor: pointer;
+}
+
+.form__button-submit--back {
+    background: none;
+    color: #00bfff;
+    text-decoration: underline;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    font-size: 16px;
 }

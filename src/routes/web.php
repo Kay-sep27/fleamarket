@@ -1,27 +1,25 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\AdminController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+// お問い合わせフォーム（ユーザー側）
+Route::get('/', [ContactController::class, 'index'])->name('contact.index');
+Route::post('/confirm', [ContactController::class, 'confirm'])->name('contact.confirm');
 
-Route::get('/', function () {
-    return view('index');
-});
-Route::get('/confirm', function () {
-    return view('confirm');
-});
-Route::get('/thanks', function () {
-    return view('thanks');
-});
-Route::get('/admin', function () {
-    return view('admin');
+// POSTがエラーになるので一時GETでthanksページ確認
+//Route::get('/thanks-test', function () {
+    //return view('thanks');
+Route::post('/thanks', [ContactController::class, 'store'])->name('contact.thanks');
+
+Route::post('/contact/edit', [ContactController::class, 'edit'])->name('contact.edit');
+Route::post('/back', [ContactController::class, 'back'])->name('contact.back');
+
+// 管理画面（ログイン後のみアクセス可能）
+Route::middleware(['auth'])->group(function () {
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+    Route::get('/admin/detail/{id}', [AdminController::class, 'show'])->name('admin.show');
+    Route::delete('/admin/delete/{id}', [AdminController::class, 'destroy'])->name('admin.destroy');
+    Route::get('/admin/export', [AdminController::class, 'export'])->name('admin.export');
 });
