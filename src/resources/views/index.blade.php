@@ -8,6 +8,7 @@
   <title>Contact Form</title>
   <link rel="stylesheet" href="{{ asset('css/sanitize.css') }}?v={{ time() }}" />
   <link rel="stylesheet" href="{{ asset('css/index.css') }}?v={{ time() }}" />
+  <link rel="stylesheet" href="{{ asset('css/common.css') }}">
 </head>
 
 <body>

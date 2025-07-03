@@ -27,23 +27,35 @@ class FortifyServiceProvider extends ServiceProvider
      * Bootstrap any application services.
      */
     public function boot(): void
-    {
-        Fortify::createUsersUsing(CreateNewUser::class);
-        Fortify::updateUserProfileInformationUsing(UpdateUserProfileInformation::class);
-        Fortify::updateUserPasswordsUsing(UpdateUserPassword::class);
-        Fortify::resetUserPasswordsUsing(ResetUserPassword::class);
+{
+    Fortify::createUsersUsing(CreateNewUser::class);
+    Fortify::updateUserProfileInformationUsing(UpdateUserProfileInformation::class);
+    Fortify::updateUserPasswordsUsing(UpdateUserPassword::class);
+    Fortify::resetUserPasswordsUsing(ResetUserPassword::class);
 
-        RateLimiter::for('login', function (Request $request) {
-            $throttleKey = Str::transliterate(Str::lower($request->input(Fortify::username())).'|'.$request->ip());
 
-            return Limit::perMinute(5)->by($throttleKey);
-        });
+    // ログインのレート制限
+    RateLimiter::for('login', function (Request $request) {
+        $throttleKey = Str::transliterate(
+            Str::lower($request->input(Fortify::username())) . '|' . $request->ip()
+        );
 
-        RateLimiter::for('two-factor', function (Request $request) {
-            return Limit::perMinute(5)->by($request->session()->get('login.id'));
-        });
-            Fortify::loginView(function () {
-                return view('auth.login');
-        });
-    }
+        return Limit::perMinute(5)->by($throttleKey);
+    });
+
+    // 2要素認証のレート制限
+    RateLimiter::for('two-factor', function (Request $request) {
+        return Limit::perMinute(5)->by($request->session()->get('login.id'));
+    });
+
+    // レートリミッターの外に書く！
+    Fortify::loginView(function () {
+        return view('auth.login');
+    });
+
+    // 登録画面
+    Fortify::registerView(function () {
+        return view('auth.register');
+    });
+}
 }

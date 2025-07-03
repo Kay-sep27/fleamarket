@@ -1,20 +1,20 @@
-.header {
+/* common.cssに記載 .header {
     background: #00bfff;
-}
+}*/
 
-.header__inner {
+/* common.cssに記載.header__inner {
     margin: 0 auto;
     padding: 20px 15px;
     max-width: 1230px;
     text-align: center;
-}
+}*/
 
-.header__logo {
+/* common.cssに記載.header__logo {
     color: #ffff00;
     text-decoration: none;
     font-weight: bold;
     font-size: 24px;
-}
+}*/
 
 .contact-form__content {
     margin: 0 auto;
@@ -91,12 +91,12 @@
 }
 
 /* エラーメッセージ */
-.form__error {
+/*common.cssに記載.form__error {
     height: 20px;
     color: #ff0000;
     text-align: right;
     font-size: 15px;
-}
+}*/
 
 /* ボタン */
 .form__button {

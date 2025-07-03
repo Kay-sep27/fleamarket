@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Confirm</title>
   <link rel="stylesheet" href="{{ asset('css/confirm.css') }}" />
+  <link rel="stylesheet" href="{{ asset('css/common.css') }}">
 </head>
 <body>
   <header class="header">
