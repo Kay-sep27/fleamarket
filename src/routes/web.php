@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ExportController;
+
 
 // お問い合わせフォーム（ユーザー側）
 Route::get('/', [ContactController::class, 'index'])->name('contact.index');
@@ -22,4 +24,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/detail/{id}', [AdminController::class, 'show'])->name('admin.show');
     Route::delete('/admin/delete/{id}', [AdminController::class, 'destroy'])->name('admin.destroy');
     Route::get('/admin/export', [AdminController::class, 'export'])->name('admin.export');
+
+// CSVエクスポート
+Route::get('/export', [ExportController::class, 'export'])->name('export');
 });

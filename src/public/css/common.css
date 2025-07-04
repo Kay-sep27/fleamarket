@@ -23,3 +23,41 @@
     text-align: right;
     font-size: 15px;
 }
+
+/* === ページネーション部分 === */
+..pagination {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding-left: 0;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    /* ↑スマホ表示で折り返し可能にしたい場合 */
+}
+
+.pagination li {
+    display: inline-block;
+    margin: 0 4px;
+}
+
+.pagination li a,
+.pagination li span {
+    display: block;
+    padding: 8px 12px;
+    background-color: #f2f2f2;
+    color: #333;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.pagination li.active span {
+    background-color: #00bfff;
+    color: white;
+    font-weight: bold; }
+
+/* === エラーメッセージ表示用 === */
+.form__error {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;     }

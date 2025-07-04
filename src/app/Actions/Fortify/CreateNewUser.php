@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Actions\Fortify;
+use App\Http\Requests\RegisterRequest;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -28,8 +29,9 @@ class CreateNewUser implements CreatesNewUsers
                 'max:255',
                 Rule::unique(User::class),
             ],
-            'password' => $this->passwordRules(),
-        ])->validate();
+        'password' => ['required', 'string', 'min:8', 'confirmed'],
+    'password_confirmation' => ['required'],
+])->validate();
 
         return User::create([
             'name' => $input['name'],
@@ -37,4 +39,22 @@ class CreateNewUser implements CreatesNewUsers
             'password' => Hash::make($input['password']),
         ]);
     }
+
+    public function __invoke(array $input)
+{
+    // RegisterRequest を使って手動バリデーション
+    $request = new RegisterRequest();
+    $request->merge($input); // 配列をRequestに変換
+
+    $validator = \Validator::make($request->all(), $request->rules(), $request->messages());
+    if ($validator->fails()) {
+        throw new \Illuminate\Validation\ValidationException($validator);
+    }
+
+    return User::create([
+        'name' => $input['name'],
+        'email' => $input['email'],
+        'password' => Hash::make($input['password']),
+    ]);
+}
 }
