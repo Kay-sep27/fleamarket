@@ -50,14 +50,14 @@ class AdminController extends Controller
     return view('admin.index', compact('contacts'));
 }
 
-    // 追加ページの表示（通常は不要ですが教材準拠なら仮置き）
+    // 追加ページの表示
     public function add()
     {
         $categories = Category::all();
         return view('admin_add', ['categories' => $categories]);
     }
 
-    // 追加処理（通常は使いませんが教材準拠で）
+    // 追加処理
     public function create(Request $request)
     {
         $form = $request->all();
@@ -92,8 +92,17 @@ class AdminController extends Controller
 
     // 詳細画面の表示
     public function show($id)
-{
+    {
     $contact = Contact::with('category')->findOrFail($id);
     return view('admin.show', compact('contact'));
+    }
+
+    // データ消去
+    public function destroy($id)
+    {
+    $contact = Contact::findOrFail($id);
+    $contact->delete();
+
+    return redirect()->route('admin.index')->with('success', 'お問い合わせを削除しました');
 }
 }

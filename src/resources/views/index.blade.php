@@ -15,7 +15,7 @@
   <header class="header">
     <div class="header__inner">
       <a class="header__logo" href="/">
-        Dora×2 Fashion🛎️
+        DORA×2 FASHION
       </a>
     </div>
   </header>
@@ -23,12 +23,11 @@
   <main>
     <div class="contact-form__content">
       <div class="contact-form__heading">
-        <h2>Contact</h2>
+        <h2>お問い合わせ</h2>
       </div>
       <form class="form" action="/confirm" method="POST">
         @csrf
 
-        <!-- 一部省略。基本構造はそのまま -->
 <form class="form" action="/confirm" method="POST">
   @csrf
 
@@ -75,9 +74,9 @@
   <div class="form__group">
     <label class="form__label">電話番号<span class="form__label--required">※</span></label>
     <div class="form__input-wrapper" style="gap: 8px;">
-      <input type="text" name="tel1" maxlength="5" style="width: 60px;"> -
-      <input type="text" name="tel2" maxlength="4" style="width: 60px;"> -
-      <input type="text" name="tel3" maxlength="4" style="width: 60px;">
+      <input type="text" name="tel1" maxlength="5" style="width: 90px;"> -
+      <input type="text" name="tel2" maxlength="4" style="width: 90px;"> -
+      <input type="text" name="tel3" maxlength="4" style="width: 90px;">
     </div>
   </div>
   @if ($errors->has('tel1') || $errors->has('tel2') || $errors->has('tel3'))

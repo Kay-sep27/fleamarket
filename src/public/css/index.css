@@ -1,5 +1,5 @@
 /* common.cssに記載 .header {
-    background: #00bfff;
+    background: #01A0E9
 }*/
 
 /* common.cssに記載.header__inner {
@@ -10,7 +10,7 @@
 }*/
 
 /* common.cssに記載.header__logo {
-    color: #ffff00;
+    color: #FFCB00
     text-decoration: none;
     font-weight: bold;
     font-size: 24px;
@@ -23,6 +23,7 @@
 }
 
 .contact-form__heading {
+    color: #01A0E9;
     margin-bottom: 40px;
     text-align: center;
 }
@@ -35,7 +36,7 @@
 /* --- ここからフォームレイアウト調整 --- */
 .form__group {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     margin-bottom: 15px;
 }
 
@@ -43,6 +44,7 @@
 .form__label {
     width: 30%;
     font-weight: bold;
+    padding-top: 8px;
 }
 
 /* 入力欄を右側にそろえる */
@@ -62,6 +64,7 @@
     appearance: none;
     width: 100%;
     box-sizing: border-box;
+    background-color: #fff;
 }
 /* 性別ラジオボタン専用 */
 .radio-group {
@@ -75,6 +78,11 @@
 /* 高さ指定 */
 .form__input-wrapper input {
     height: 40px;
+}
+
+select {
+    height: 40px;
+    padding: 5px 10px;
 }
 
 .form__input-wrapper textarea {
@@ -98,7 +106,7 @@
     font-size: 15px;
 }*/
 
-/* ボタン */
+/* ボタンcommonに記載 
 .form__button {
     margin-top: 30px;
     text-align: center;
@@ -113,4 +121,4 @@
     background: #00bfff;
     color: #fff;
     cursor: pointer;
-}
+}*/

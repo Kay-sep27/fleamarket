@@ -11,7 +11,7 @@
 <body>
   <header class="header">
     <div class="header__inner">
-      <a class="header__logo" href="/">Contact Form</a>
+      <a class="header__logo" href="/">DORA×2 FASHION</a>
       <nav class="header__nav">
       @auth
         <form method="POST" action="{{ route('logout') }}">

@@ -23,8 +23,8 @@
     </div>
 
     <div style="text-align: center;">
-      <a href="/" style="color: #00bfff; text-decoration: underline;">HOME</a>
-    </div>
+  <a href="/" class="home-button">HOME</a>
+</div>
   </main>
 </body>
 </html>

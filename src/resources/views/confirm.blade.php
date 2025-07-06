@@ -16,7 +16,7 @@
 
   <main class="confirm__content">
     <div class="confirm__heading">
-      <h2>Confirm</h2>
+      <h2>送信内容確認</h2>
     </div>
 
     <table class="confirm-table confirm-table__inner">
@@ -55,7 +55,7 @@
     </table>
 
     {{-- ボタン部分 --}}
-    <div class="form__button-wrapper">
+    <div class="confirm-buttons">
       {{-- 送信ボタン（thanksへ） --}}
       <form action="{{ route('contact.thanks') }}" method="POST">
         @csrf
@@ -71,7 +71,7 @@
         <input type="hidden" name="category_id" value="{{ $contact['category_id'] }}">
         <input type="hidden" name="content" value="{{ $contact['content'] }}">
 
-        <button class="form__button-submit" type="submit">送信</button>
+        <button type="submit">送信</button>
       </form>
 
       <!-- 修正ボタン（背景なし・下線だけ） -->

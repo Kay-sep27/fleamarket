@@ -1,0 +1,26 @@
+/*auth cssにまとめた
+.form__group {
+    margin-bottom: 16px;
+}
+
+.form__group label {
+    display: block;
+    font-weight: bold;
+    font-family: 'Zen Maru Gothic', sans-serif;
+}
+
+.form__group input {
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    width: 100%;
+}
+
+.form__button-submit {
+    padding: 10px 24px;
+    background-color: #00bfff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold; }*/

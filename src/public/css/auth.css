@@ -1,0 +1,87 @@
+/* registerとloginのcssをまとめる */
+
+.form__group label {
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-weight: bold;
+}
+
+.form__group input {
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #aaa;
+    width: 100%;
+}
+
+.form__button-submit {
+    background-color: #01A0E9;
+    color: white;
+    padding: 10px 24px;
+    border-radius: 4px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer; }
+
+body {
+    background-color: #f0f8ff;
+    /* 背景 */
+}
+
+.form {
+    max-width: 420px;
+    margin: 40px auto;
+    padding: 40px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.form h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: bold;
+    font-size: 24px;
+    color: #01A0E9;
+}
+
+.form__group {
+    margin-bottom: 20px;
+}
+
+.form__group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #01A0E9;
+}
+
+.form__group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-family: 'Zen Maru Gothic', sans-serif;
+}
+
+.form__error {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.form__button {
+    text-align: center;
+}
+
+.form__button-submit {
+    background-color: #87cefa;
+    color: #fff;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.form__button-submit:hover {
+    background-color: #01A0E9;     }
