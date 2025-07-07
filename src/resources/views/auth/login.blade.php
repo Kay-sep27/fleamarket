@@ -12,7 +12,7 @@
 
       <div class="form__group">
         <label>メールアドレス</label>
-        <input type="email" name="email" required>
+        <input type="email" name="email">
         @error('email')
           <p class="form__error">{{ $message }}</p>
         @enderror
@@ -20,7 +20,7 @@
 
       <div class="form__group">
         <label>パスワード</label>
-        <input type="password" name="password" required>
+        <input type="password" name="password">
         @error('password')
           <p class="form__error">{{ $message }}</p>
         @enderror

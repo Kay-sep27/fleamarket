@@ -18,7 +18,7 @@ class Contact extends Model
         'address',
         'building_name', // 建物名（任意項目）
         'category_id',
-        'content',
+        'detail',
     ];
 
     public function category()

@@ -66,6 +66,7 @@ body {
     color: red;
     font-size: 14px;
     margin-top: 5px;
+    white-space: nowrap;/* ← 改行させない */
 }
 
 .form__button {

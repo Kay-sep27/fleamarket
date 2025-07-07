@@ -1,0 +1,18 @@
+/* エクスポート用 */
+
+.export-button {
+    padding: 8px 16px;
+    background-color: #aaa;
+    color: white;
+    border: none;
+    border-radius: 0;/* ← 四角の丸み*/
+    cursor: pointer;
+    text-decoration: none; /* ← 下線を無くす（aタグにも効く） */
+    font-weight: bold;
+}
+
+.export-wrapper {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 20px;
+}

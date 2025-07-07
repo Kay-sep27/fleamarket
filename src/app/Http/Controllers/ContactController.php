@@ -26,16 +26,24 @@ class ContactController extends Controller
     // データ保存＆サンクスページへ
     public function store(ContactRequest $request)
     {
-        //dd('storeメソッドに到達'); // ←ここで送信データを表示してみる
+    $contact = new Contact();
+    $form = $request->validated();
 
-        $contact = new Contact();
-        $form = $request->validated(); // バリデーション済みデータのみ取得
-        // 電話番号の連結処理
-        $form['tel'] = $request->tel1 . $request->tel2 .  $request->tel3;
-        $form['building_name'] = $request->building_name;
-        unset($form['tel1'], $form['tel2'], $form['tel3']);
-        $contact->fill($form)->save();
-        return view('thanks');
+    // 電話番号を1本に結合
+    $form['tel'] = $request->tel1 . $request->tel2 . $request->tel3;
+
+    // 建物名（nullable）
+    $form['building_name'] = $request->building_name;
+
+    // お問い合わせ内容を detail に変換
+    $form['detail'] = $request->content;
+
+    // 使わないフォームパーツを削除
+    unset($form['tel1'], $form['tel2'], $form['tel3'], $form['content']);
+
+    $contact->fill($form)->save();
+
+    return view('thanks');
     }
 
     // 修正ボタンで戻るとき（フォーム値を保持したまま）

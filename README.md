@@ -15,6 +15,7 @@
     ```bash
     docker compose up -d --build
     ```
+    * MysQLは、OSによって起動しない場合があるのでそれぞれのPCに合わせて docker-compose.ymlファイルを編集してください。
 
 3. Laravelコンテナに入る
     ```bash

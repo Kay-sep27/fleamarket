@@ -13,7 +13,7 @@ Route::post('/confirm', [ContactController::class, 'confirm'])->name('contact.co
 // POSTがエラーになるので一時GETでthanksページ確認
 //Route::get('/thanks-test', function () {
     //return view('thanks');
-Route::post('/thanks', [ContactController::class, 'store'])->name('contact.thanks');
+Route::post('/thanks', [ContactController::class, 'store'])->name('contact.store');
 
 Route::post('/contact/edit', [ContactController::class, 'edit'])->name('contact.edit');
 Route::post('/back', [ContactController::class, 'back'])->name('contact.back');
@@ -23,8 +23,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
     Route::get('/admin/detail/{id}', [AdminController::class, 'show'])->name('admin.show');
     Route::delete('/admin/delete/{id}', [AdminController::class, 'destroy'])->name('admin.destroy');
-    Route::get('/admin/export', [AdminController::class, 'export'])->name('admin.export');
 
-// CSVエクスポート
-Route::get('/export', [ExportController::class, 'export'])->name('export');
+    // CSVエクスポート（1つでOK）
+    Route::get('/admin/export', [AdminController::class, 'export'])->name('admin.export');
 });

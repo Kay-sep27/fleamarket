@@ -1,0 +1,132 @@
+/* ------------------------------
+    見出し・レイアウト
+------------------------------ */
+h2 {
+    text-align: center;
+    font-size: 24px;
+    margin: 30px 0;
+    color: #01A0E9;
+}
+
+.admin-table-wrapper {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* ------------------------------
+    テーブル表示
+  ------------------------------ */
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+}
+
+.admin-table th {
+    background-color: #01A0E9;
+    color: white;
+    padding: 12px;
+}
+
+.admin-table td {
+    padding: 12px;
+    border-bottom: 1px solid #aaa;
+    color: #000000;
+}
+
+/* ------------------------------
+    検索フォーム
+  ------------------------------ */
+.search-form-wrapper {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.search-input,
+.search-select,
+.search-date,
+.search-btn,
+.reset-button {
+    height: 44px;
+    padding: 0 12px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    border: none;
+    border-radius: 0;
+}
+
+/* 個別サイズ調整 */
+.search-input {
+    width: 300px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+}
+
+select[name="gender"] {
+    width: 100px;
+}
+
+.search-select {
+    width: 180px;
+}
+
+.search-date {
+    width: 150px;
+}
+
+/* ボタン類 */
+.search-btn {
+    background-color: #01A0E9;
+    color: white;
+    cursor: pointer;
+}
+
+.reset-button {
+    background-color: #aaa;
+    color: white;
+    text-decoration: none;
+}
+
+/* ボタンを並べるラッパー */
+.search-form-buttons {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+/* ------------------------------
+    テーブル内ボタン（詳細・削除）
+  ------------------------------ */
+.admin-detail-button {
+    padding: 6px 12px;
+    background-color: #aaa;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button.admin-delete-button {
+    background-color: red !important;
+    color: white !important;
+    border: none !important;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 6px 12px;
+    border-radius: 5px;
+}
+
+/* ------------------------------
+    ページネーション
+  ------------------------------ */
+.pagination--top-right {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+    width: 100%; }
