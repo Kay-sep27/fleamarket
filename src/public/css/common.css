@@ -59,6 +59,26 @@ h2 {
     margin-left: 10px;
 }
 
+/* 電話番号3分割用 */
+.tel-inputs {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    /*max-width: 400px;*/
+}
+
+.tel-inputs input {
+    flex: 1;
+    min-width: 0;
+    padding: 10px;
+    font-size: 14px;
+    height: 40px;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    background-color: #fff;
+}
+
 /*フォームバリデーション用*/
 .form__error {
     height: 20px;
@@ -165,11 +185,11 @@ button.form__button-submit,
 
 .background-text {
     position: absolute;
-    top: 45%;
+    top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 160px;
-    color: #ddd;
+    font-size: 200px;
+    color: #dcdcdc;
     font-weight: bold;
     z-index: 0;
     pointer-events: none;

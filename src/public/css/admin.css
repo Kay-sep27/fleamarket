@@ -1,6 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@300;400;500;700;900&display=swap');
+
 /* ------------------------------
-    見出し・レイアウト
+全体レイアウト・見出し
 ------------------------------ */
+body {
+    font-family: 'Zen Maru Gothic', sans-serif;
+    background-color: #f0f8ff;
+}
+
 h2 {
     text-align: center;
     font-size: 24px;
@@ -14,8 +21,8 @@ h2 {
 }
 
 /* ------------------------------
-    テーブル表示
-  ------------------------------ */
+テーブル表示
+------------------------------ */
 .admin-table {
     width: 100%;
     border-collapse: collapse;
@@ -35,14 +42,15 @@ h2 {
 }
 
 /* ------------------------------
-    検索フォーム
-  ------------------------------ */
+検索フォーム
+------------------------------ */
 .search-form-wrapper {
     display: flex;
     justify-content: flex-start;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     gap: 16px;
     margin-bottom: 16px;
+    width: 100%;
 }
 
 .search-input,
@@ -57,25 +65,33 @@ h2 {
     align-items: center;
     border: none;
     border-radius: 0;
+    min-width: 80px;
+    justify-content: center;
 }
 
 /* 個別サイズ調整 */
+
+/* 名前やメール欄*/
 .search-input {
-    width: 300px;
+    flex-grow: 1;
+    min-width: 200px;
+    max-width: 300px;
     background-color: #fff;
     border: 1px solid #ccc;
 }
 
-select[name="gender"] {
-    width: 100px;
-}
-
+.select[name="gender"],
 .search-select {
-    width: 180px;
+    width: 120px;
 }
 
 .search-date {
-    width: 150px;
+    width: 130px;
+}
+
+/* お問い合わせ種類*/
+.search-select[name="category_id"] {
+    width: 180px;
 }
 
 /* ボタン類 */
@@ -91,16 +107,17 @@ select[name="gender"] {
     text-decoration: none;
 }
 
-/* ボタンを並べるラッパー */
 .search-form-buttons {
     display: flex;
     gap: 10px;
     align-items: center;
+    margin-left: auto;
+    flex-wrap: nowrap;
 }
 
 /* ------------------------------
-    テーブル内ボタン（詳細・削除）
-  ------------------------------ */
+テーブル内ボタン（詳細・削除）
+------------------------------ */
 .admin-detail-button {
     padding: 6px 12px;
     background-color: #aaa;
@@ -112,7 +129,7 @@ select[name="gender"] {
     transition: background-color 0.3s ease;
 }
 
-button.admin-delete-button {
+.admin-delete-button {
     background-color: red !important;
     color: white !important;
     border: none !important;
@@ -123,10 +140,100 @@ button.admin-delete-button {
 }
 
 /* ------------------------------
-    ページネーション
-  ------------------------------ */
+ページネーション
+------------------------------ */
 .pagination--top-right {
     display: flex;
     justify-content: flex-end;
     margin-bottom: 20px;
-    width: 100%; }
+    width: 100%;
+}
+
+/* ------------------------------
+モーダル
+------------------------------ */
+.modal-dialog {
+    max-width: 100%;
+}
+
+.modal-content {
+    border-radius: 12px;
+    padding: 30px;
+    background-color: #ffffff;
+    border: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    font-family: 'Zen Maru Gothic', sans-serif;
+    color: #000000;
+    max-width: 600px;
+    margin: auto;
+}
+
+.modal-header {
+    border-bottom: none;
+    justify-content: flex-end;
+    padding: 10px;
+    position: relative;
+}
+
+.modal-title {
+    display: none;
+    /* タイトル非表示にしたい場合 */
+}
+
+.custom-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #01A0E9;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 1051;
+}
+
+.modal-body strong,
+.modal-row strong {
+    display: inline-block;
+    width: 120px;
+    color: #01A0E9;
+    font-weight: bold;
+    line-height: 1.8;
+}
+
+.modal-row {
+    display: flex;
+    align-items: baseline;
+    /* テキストの先頭を揃える */
+    margin-bottom: 10px;
+}
+
+.modal-row strong {
+    width: 160px;
+    color: #01A0E9;
+    font-weight: bold;
+    line-height: 1.8;
+    white-space: nowrap;
+}
+
+.modal-row span {
+    flex: 1;
+    line-height: 1.5;
+    word-break: break-word;
+    white-space: pre-wrap;
+}
+
+.modal-detail {
+    word-break: break-word;
+    white-space: pre-wrap;
+    flex: 1;
+    line-height: 1.5;
+}
+
+.modal-footer {
+    border-top: none;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}

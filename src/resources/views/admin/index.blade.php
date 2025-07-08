@@ -44,7 +44,7 @@
 </form>
 
 <!-- CSV出力ボタン（検索クエリを維持） -->
-<a href="{{ route('admin.export', request()->query()) }}" class="export-button">CSVエクスポート</a>
+<a href="{{ route('admin.export', request()->query()) }}" class="export-button">エクスポート</a>
 
   <!-- ページネーション -->
   <div class="pagination pagination--top-right">
@@ -80,20 +80,31 @@
 
           <!-- モーダル -->
           <div class="modal fade" id="modal{{ $contact->id }}" tabindex="-1" aria-labelledby="modalLabel{{ $contact->id }}" aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">
+
+                <!-- ヘッダー -->
                 <div class="modal-header">
                   <h5 class="modal-title" id="modalLabel{{ $contact->id }}">お問い合わせ詳細</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="閉じる"></button>
+                  <button type="button" class="custom-close" data-bs-dismiss="modal" aria-label="閉じる">×</button>
                 </div>
+
+                <!-- 本文 -->
                 <div class="modal-body">
-                  <p><strong>氏名：</strong>{{ $contact->last_name }} {{ $contact->first_name }}</p>
-                  <p><strong>メール：</strong>{{ $contact->email }}</p>
-                  <p><strong>性別：</strong>{{ $contact->gender }}</p>
-                  <p><strong>住所：</strong>{{ $contact->address }}</p>
-                  <p><strong>建物名：</strong>{{ $contact->building_name }}</p>
-                  <p><strong>お問い合わせ内容：</strong>{{ $contact->detail }}</p>
+                <div class="modal-row"><strong>お名前：</strong><span>{{ $contact->last_name }} {{ $contact->first_name }}</span></div>
+                <div class="modal-row"><strong>性別：</strong><span>{{ $contact->gender }}</span></div>
+                <div class="modal-row"><strong>メールアドレス：</strong><span>{{ $contact->email }}</span></div>
+                <div class="modal-row"><strong>電話番号：</strong><span>{{ $contact->tel }}</span></div>
+                <div class="modal-row"><strong>住所：</strong><span>{{ $contact->address }}</span></div>
+                <div class="modal-row"><strong>建物名：</strong><span>{{ $contact->building_name }}</span></div>
+                <div class="modal-row"><strong>お問い合わせの種類：</strong><span>{{ $contact->category->name }}</span></div>
+                <div class="modal-row">
+                  <strong>お問い合わせ内容：</strong>
+                  <span class="modal-detail">{{ $contact->detail }}</span>
                 </div>
+                </div>
+
+                <!-- フッター -->
                 <div class="modal-footer">
                   <form method="POST" action="{{ route('admin.destroy', $contact->id) }}">
                     @csrf

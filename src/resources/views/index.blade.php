@@ -49,10 +49,10 @@
     <!-- 電話番号 -->
     <div class="form__group">
       <label class="form__label">電話番号<span class="form__label--required">※</span></label>
-      <div class="form__input-wrapper" style="gap: 8px;">
-        <input type="text" name="tel1" maxlength="5" style="width: 90px;" value="{{ old('tel1') }}"> -
-        <input type="text" name="tel2" maxlength="4" style="width: 90px;" value="{{ old('tel2') }}"> -
-        <input type="text" name="tel3" maxlength="4" style="width: 90px;" value="{{ old('tel3') }}">
+      <div class="form__input-wrapper tel-inputs">
+        <input type="text" name="tel1" maxlength="5" value="{{ old('tel1') }}"> -
+        <input type="text" name="tel2" maxlength="4" value="{{ old('tel2') }}"> -
+        <input type="text" name="tel3" maxlength="4" value="{{ old('tel3') }}">
       </div>
       @if ($errors->has('tel1') || $errors->has('tel2') || $errors->has('tel3'))
         <p class="form__error">
