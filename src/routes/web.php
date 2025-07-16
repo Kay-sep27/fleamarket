@@ -4,11 +4,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ExportController;
+use App\Http\Controllers\ProductController;
 
 
-// お問い合わせフォーム（ユーザー側）
-Route::get('/', [ContactController::class, 'index'])->name('contact.index');
-Route::post('/confirm', [ContactController::class, 'confirm'])->name('contact.confirm');
+// 商品一覧ページ
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 
 // POSTがエラーになるので一時GETでthanksページ確認
 //Route::get('/thanks-test', function () {
