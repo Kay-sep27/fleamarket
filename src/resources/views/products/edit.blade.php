@@ -1,61 +1,77 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <title>商品編集</title>
-</head>
-<body>
-    <h1>商品編集フォーム</h1>
+@extends('layouts.app')
 
-    @if ($errors->any())
-        <div style="color:red;">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
+@section('title', '商品編集')
+
+@section('css')
+<link rel="stylesheet" href="{{ asset('css/products.css') }}">
+@endsection
+
+@section('content')
+<div class="container">
+
+  <h2 class="page-title">商品情報を編集</h2>
+
+  <form action="{{ route('products.update', $product->id) }}" method="POST" enctype="multipart/form-data">
+    @csrf
+    @method('PUT')
+
+    <div class="product-detail-wrapper">
+
+      {{-- 左：画像エリア --}}
+      <div class="product-detail-image">
+        <img src="{{ $product->image ? asset('storage/' . $product->image) : asset('images/noimage.png') }}" alt="{{ $product->name }}">
+        <p class="image-filename">{{ basename($product->image) }}</p>
+
+        <div class="field">
+          <label for="image">画像アップロード</label>
+          <input type="file" name="image" id="image">
         </div>
-    @endif
+      </div>
 
-    <form action="{{ route('products.update', $product->id) }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        @method('PUT')
+      {{-- 右：商品情報エリア --}}
+      <div class="product-detail-info">
 
-        <div>
-            <label>商品名:</label><br>
-            <input type="text" name="name" value="{{ old('name', $product->name) }}">
-        </div>
-
-        <div>
-            <label>価格:</label><br>
-            <input type="number" name="price" value="{{ old('price', $product->price) }}">
-        </div>
-
-        <div>
-            <label>画像:</label><br>
-            @if ($product->image)
-                <img src="{{ asset('storage/' . $product->image) }}" width="100"><br>
-            @endif
-            <input type="file" name="image">
+        {{-- 商品名 --}}
+        <div class="field">
+          <label for="name">商品名</label>
+          <input type="text" name="name" id="name" value="{{ old('name', $product->name) }}">
         </div>
 
-        <div>
-            <label>説明:</label><br>
-            <textarea name="description">{{ old('description', $product->description) }}</textarea>
+        {{-- 値段 --}}
+        <div class="field">
+          <label for="price">値段</label>
+          <input type="text" name="price" id="price" value="{{ old('price', $product->price) }}">
         </div>
 
-        <div>
-            <label>季節（複数選択可）:</label><br>
+        {{-- 季節チェックボックス --}}
+        <div class="field">
+          <label>季節</label>
+          <div class="seasons">
             @foreach ($seasons as $season)
-                <label>
-                    <input type="checkbox" name="seasons[]" value="{{ $season->id }}"
-                        {{ $product->seasons->contains($season->id) ? 'checked' : '' }}>
-                    {{ $season->name }}
-                </label><br>
+              <label>
+                <input type="checkbox" name="seasons[]" value="{{ $season->id }}"
+                  {{ in_array($season->id, old('seasons', $product->seasons->pluck('id')->toArray())) ? 'checked' : '' }}>
+                {{ $season->name }}
+              </label>
             @endforeach
+          </div>
         </div>
 
-        <button type="submit">更新する</button>
-    </form>
-</body>
-</html>
+        {{-- 商品説明 --}}
+        <div class="field">
+          <label for="description">商品説明</label>
+          <textarea name="description" id="description">{{ old('description', $product->description) }}</textarea>
+        </div>
+
+        {{-- アクションボタン --}}
+        <div class="actions">
+          <button type="submit" class="btn btn-warning">変更を保存</button>
+          <a href="{{ route('products.index') }}" class="btn btn-light">戻る</a>
+        </div>
+
+      </div>
+    </div>
+  </form>
+
+</div>
+@endsection

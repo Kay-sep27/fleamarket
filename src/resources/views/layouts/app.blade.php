@@ -21,15 +21,7 @@
 
       <!-- ナビゲーション -->
       <div class="header__nav">
-        @auth
-          <form method="POST" action="{{ route('logout') }}">
-            @csrf
-            <button type="submit" class="header__nav-button">ログアウト</button>
-          </form>
-        @else
-          <a class="header__nav-button" href="{{ route('login') }}">ログイン</a>
-          <a class="header__nav-button" href="{{ route('register') }}">新規登録</a>
-        @endauth
+        {{-- ログイン・ログアウトなど（今は不要なら削除してもOK） --}}
       </div>
     </div>
   </header>
