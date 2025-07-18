@@ -1,14 +1,16 @@
+# node_modules と vendor は除外
 /node_modules
-/public/hot
-/storage/*.key
 /vendor
+
+# storageのキーは除外
+/storage/*.key
+
+# 画像などは除外しないように明示的に解除
+!/storage/app/public
+
+# その他
 .env
-.env.backup
+.env.*
 .phpunit.result.cache
-docker-compose.override.yml
-Homestead.json
-Homestead.yaml
-npm-debug.log
-yarn-error.log
 /.idea
 /.vscode

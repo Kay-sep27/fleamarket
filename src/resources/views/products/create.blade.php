@@ -1,75 +1,61 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <title>商品登録</title>
-    <style>
-        body {
-            font-family: sans-serif;
-            padding: 20px;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        label {
-            font-weight: bold;
-        }
-        .error {
-            color: red;
-            margin-bottom: 15px;
-        }
-    </style>
-</head>
-<body>
-    <h1>商品登録フォーム</h1>
+@extends('layouts.app')
 
-    {{-- エラーメッセージ --}}
-    @if ($errors->any())
-        <div class="error">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>※ {{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+@section('title', '商品登録')
 
-    {{-- 登録フォーム --}}
-    <form action="{{ route('products.confirm') }}" method="POST" enctype="multipart/form-data">
+@section('css')
+<link rel="stylesheet" href="{{ asset('css/products.css') }}">
+@endsection
+
+@section('content')
+<div class="form-container">
+
+    <h1 class="form-title">商品登録</h1>
+
+    <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
+        <!-- 商品名 -->
         <div class="form-group">
-            <label for="name">商品名:</label><br>
-            <input type="text" id="name" name="name" value="{{ old('name') }}">
+            <label>商品名 <span class="required">必須</span></label>
+            <input type="text" name="name" placeholder="商品名を入力" value="{{ old('name') }}">
         </div>
 
+        <!-- 値段 -->
         <div class="form-group">
-            <label for="price">価格（円）:</label><br>
-            <input type="number" id="price" name="price" value="{{ old('price') }}">
+            <label>値段 <span class="required">必須</span></label>
+            <input type="number" name="price" placeholder="値段を入力" value="{{ old('price') }}">
         </div>
 
+        <!-- 商品画像 -->
         <div class="form-group">
-            <label for="image">画像:</label><br>
-            <input type="file" id="image" name="image">
+            <label>商品画像 <span class="required">必須</span></label>
+            <input type="file" name="image">
         </div>
 
+        <!-- 季節 -->
         <div class="form-group">
-            <label for="description">説明:</label><br>
-            <textarea id="description" name="description" rows="4">{{ old('description') }}</textarea>
-        </div>
-
-        <div class="form-group">
-            <label>季節（複数選択可）:</label><br>
-            @foreach ($seasons as $season)
+            <label>季節 <span class="required">必須</span><span class="note">　複数選択可</span></label>
+            <div class="season-checkboxes">
+                @foreach($seasons as $season)
                 <label>
-                    <input type="checkbox" name="seasons[]" value="{{ $season->id }}"
-                        {{ in_array($season->id, old('seasons', [])) ? 'checked' : '' }}>
+                    <input type="checkbox" name="seasons[]" value="{{ $season->id }}">
                     {{ $season->name }}
-                </label><br>
-            @endforeach
+                </label>
+                @endforeach
+            </div>
         </div>
 
-        <button type="submit">登録する</button>
+        <!-- 商品説明 -->
+        <div class="form-group">
+            <label>商品説明 <span class="required">必須</span></label>
+            <textarea name="description" placeholder="商品の説明を入力">{{ old('description') }}</textarea>
+        </div>
+
+        <!-- ボタン -->
+        <div class="form-buttons">
+            <a href="{{ route('products.index') }}" class="btn-gray">戻る</a>
+            <button type="submit" class="btn-yellow">登録</button>
+        </div>
     </form>
-</body>
-</html>
+</div>
+@endsection

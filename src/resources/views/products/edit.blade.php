@@ -7,71 +7,48 @@
 @endsection
 
 @section('content')
-<div class="container">
+<div class="edit-container">
+    <a href="{{ route('products.index') }}" class="back-link">← 商品一覧</a>
 
-  <h2 class="page-title">商品情報を編集</h2>
+    <form action="{{ route('products.update', $product->id) }}" method="POST" enctype="multipart/form-data" class="edit-form">
+        @csrf
+        @method('PUT')
 
-  <form action="{{ route('products.update', $product->id) }}" method="POST" enctype="multipart/form-data">
-    @csrf
-    @method('PUT')
-
-    <div class="product-detail-wrapper">
-
-      {{-- 左：画像エリア --}}
-      <div class="product-detail-image">
-        <img src="{{ $product->image ? asset('storage/' . $product->image) : asset('images/noimage.png') }}" alt="{{ $product->name }}">
-        <p class="image-filename">{{ basename($product->image) }}</p>
-
-        <div class="field">
-          <label for="image">画像アップロード</label>
-          <input type="file" name="image" id="image">
-        </div>
-      </div>
-
-      {{-- 右：商品情報エリア --}}
-      <div class="product-detail-info">
-
-        {{-- 商品名 --}}
-        <div class="field">
-          <label for="name">商品名</label>
-          <input type="text" name="name" id="name" value="{{ old('name', $product->name) }}">
+        <div class="form-image-preview">
+            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="preview-img">
+            <input type="file" name="image">
         </div>
 
-        {{-- 値段 --}}
-        <div class="field">
-          <label for="price">値段</label>
-          <input type="text" name="price" id="price" value="{{ old('price', $product->price) }}">
+        <div class="form-group">
+            <label>商品名</label>
+            <input type="text" name="name" value="{{ old('name', $product->name) }}">
         </div>
 
-        {{-- 季節チェックボックス --}}
-        <div class="field">
-          <label>季節</label>
-          <div class="seasons">
-            @foreach ($seasons as $season)
-              <label>
-                <input type="checkbox" name="seasons[]" value="{{ $season->id }}"
-                  {{ in_array($season->id, old('seasons', $product->seasons->pluck('id')->toArray())) ? 'checked' : '' }}>
-                {{ $season->name }}
-              </label>
+        <div class="form-group">
+            <label>値段</label>
+            <input type="number" name="price" value="{{ old('price', $product->price) }}">
+        </div>
+
+        <div class="form-group">
+            <label>季節（複数選択可）</label><br>
+            @foreach($seasons as $season)
+                <label>
+                    <input type="checkbox" name="seasons[]" value="{{ $season->id }}"
+                        {{ in_array($season->id, old('seasons', $product->seasons->pluck('id')->toArray())) ? 'checked' : '' }}>
+                    {{ $season->name }}
+                </label>
             @endforeach
-          </div>
         </div>
 
-        {{-- 商品説明 --}}
-        <div class="field">
-          <label for="description">商品説明</label>
-          <textarea name="description" id="description">{{ old('description', $product->description) }}</textarea>
+        <div class="form-group">
+            <label>商品説明</label>
+            <textarea name="description">{{ old('description', $product->description) }}</textarea>
         </div>
 
-        {{-- アクションボタン --}}
-        <div class="actions">
-          <button type="submit" class="btn btn-warning">変更を保存</button>
-          <a href="{{ route('products.index') }}" class="btn btn-light">戻る</a>
+        <div class="form-buttons">
+            <a href="{{ route('products.index') }}" class="btn-gray">戻る</a>
+            <button type="submit" class="btn-yellow">変更を保存</button>
         </div>
-
-      </div>
-    </div>
-  </form>
-
+    </form>
 </div>
 @endsection
