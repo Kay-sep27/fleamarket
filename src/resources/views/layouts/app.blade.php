@@ -30,7 +30,10 @@
     @yield('content')
   </main>
 
-  <!-- Bootstrap JS（必要な場合のみ） -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- ページごとのJS -->
+@yield('js')
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

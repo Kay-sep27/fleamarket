@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Season;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\StoreProductRequest;
 
 class ProductController extends Controller
 {
@@ -17,7 +18,7 @@ class ProductController extends Controller
         $products = Product::query()
             ->when($keyword, function ($query, $keyword) {
                 $query->where('name', 'like', "%{$keyword}%")
-                      ->orWhere('description', 'like', "%{$keyword}%");
+                    ->orWhere('description', 'like', "%{$keyword}%");
             })
             ->get();
 
@@ -28,20 +29,12 @@ class ProductController extends Controller
     public function create()
     {
         $seasons = Season::all();
-        return view('products.create', compact('seasons'));
+        return view('products.register', compact('seasons'));
     }
 
     // 商品登録
-    public function store(Request $request)
+    public function store(StoreProductRequest $request)
     {
-        $request->validate([
-            'name'        => 'required|string|max:255',
-            'price'       => 'required|integer|min:0',
-            'image'       => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'description' => 'nullable|string',
-            'seasons'     => 'nullable|array',
-            'seasons.*'   => 'integer|exists:seasons,id',
-        ]);
 
         $imagePath = $request->hasFile('image')
             ? $request->file('image')->store('images', 'public')
@@ -164,9 +157,4 @@ class ProductController extends Controller
     return view('products.index', compact('products'));
     }
 
-    public function create()
-    {
-    $seasons = Season::all(); // 
-    return view('products.create', compact('seasons'));
-    }
 }

@@ -13,6 +13,23 @@ body {
     padding: 30px 20px;
 }
 
+h1 {
+    text-align: center;
+    font-weight: 700;
+}
+
+.required-badge {
+    background-color: red;
+    color: white;
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-weight: normal;
+    margin-left: 5px;
+    vertical-align: middle;
+}
+
+
 /* ----------------------------
   商品一覧：ヘッダー
 ---------------------------- */
@@ -207,6 +224,18 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -58%);
+}
+
+.season-group {
+    display: flex;
+    gap: 25px;
+    margin-top: 8px;
+}
+
+.season-group label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
 /* ----------------------------
@@ -413,6 +442,19 @@ textarea {
     color: #333;
 }
 
+/* 選択されていません を白にして見えなくする */
+input.hide-placeholder-text::-webkit-file-upload-button {
+    color: inherit;
+}
+
+input.hide-placeholder-text::file-selector-button {
+    color: #333;
+}
+
+input.hide-placeholder-text {
+    color: white;
+}
+
 textarea {
     height: 100px;
     resize: vertical;
@@ -428,23 +470,33 @@ textarea {
     margin-top: 30px;
 }
 
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 30px;
+}
+
 .btn-yellow {
-    background: #FFD700;
-    color: #333;
+    background-color: #FFD700;
     padding: 10px 30px;
     border: none;
     border-radius: 6px;
-    font-weight: bold;
-    cursor: pointer;
 }
 
 .btn-gray {
-    background: #ccc;
-    color: #333;
+    background-color: #ccc;
     padding: 10px 30px;
     border: none;
     border-radius: 6px;
-    font-weight: bold;
-    text-decoration: none;
-    text-align: center;
+}
+
+.btn-submit {
+    padding: 12px 40px;
+    font-size: 16px;
+}
+
+.error {
+    color: red;
+    font-size: 14px;
 }
