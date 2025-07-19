@@ -1,26 +1,117 @@
-/*auth cssにまとめた
-.form__group {
-    margin-bottom: 16px;
+.form-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    background-color: #f9f9f9;
 }
 
-.form__group label {
-    display: block;
+.form-title {
+    text-align: center;
+    font-size: 28px;
     font-weight: bold;
-    font-family: 'Zen Maru Gothic', sans-serif;
+    margin-bottom: 40px;
+    color: #333;
 }
 
-.form__group input {
-    padding: 10px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
+.form-group {
+    margin-bottom: 24px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="file"],
+textarea {
     width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
 }
 
-.form__button-submit {
-    padding: 10px 24px;
-    background-color: #00bfff;
-    color: white;
+textarea {
+    height: 120px;
+    resize: vertical;
+}
+
+input[type="file"] {
+    background-color: transparent;
+    color: transparent;
     border: none;
-    border-radius: 4px;
+    padding: 6px 12px;
+    font-size: 14px;
+}
+
+.required-badge {
+    color: #fff;
+    background-color: #e60023;
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 3px;
+    margin-left: 8px;
+}
+
+.small-label {
+    font-size: 12px;
+    margin-left: 8px;
+    color: #e60023;
+}
+
+.checkbox-group {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.error {
+    font-size: 13px;
+    color: #e60023;
+    margin-top: 4px;
+}
+
+#preview-container img {
+    max-width: 100%;
+    border-radius: 6px;
+}
+
+#fileName {
+    margin-top: 6px;
+    font-size: 13px;
+    color: #444;
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 32px;
+}
+
+.btn-gray,
+.btn-yellow {
+    width: 200px;
+    font-size: 16px;
+    padding: 14px 0;
+    border: none;
+    border-radius: 6px;
     cursor: pointer;
-    font-weight: bold; }*/
+    text-align: center;
+}
+
+.btn-gray {
+    background-color: #eee;
+    color: #333;
+}
+
+.btn-yellow {
+    background-color: #FFD700;
+    color: #333;
+}

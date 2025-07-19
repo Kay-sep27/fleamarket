@@ -3,26 +3,26 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 
-// 商品一覧・検索
-Route::get('/products', [ProductController::class, 'index'])->name('products.index');
-Route::get('/products/search', [ProductController::class, 'search'])->name('products.search');
+Route::prefix('products')->name('products.')->group(function () {
+    // 商品一覧（GET /products）
+    Route::get('/', [ProductController::class, 'index'])->name('index');
 
-// 商品登録
-Route::get('/products/register', [ProductController::class, 'create'])->name('products.create');
-Route::post('/products', [ProductController::class, 'store'])->name('products.store');
+    // 商品検索（GET /products/search）
+    Route::get('/search', [ProductController::class, 'search'])->name('search');
 
-// 確認画面
-Route::post('/products/confirm', [ProductController::class, 'confirm'])->name('products.confirm');
+    // 商品登録（フォーム表示＋登録処理）
+    Route::get('/register', [ProductController::class, 'create'])->name('create');  // フォーム
+    Route::post('/register', [ProductController::class, 'store'])->name('store');   // 登録処理
 
-// 商品登録完了画面（任意）
-Route::get('/products/thanks', [ProductController::class, 'thanks'])->name('products.thanks');
+    // 商品詳細（GET /products/{product}）
+    Route::get('/{product}', [ProductController::class, 'show'])->name('show');
 
-// 商品詳細
-Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
+    // 商品編集（GET /products/{product}/edit）
+    Route::get('/{product}/edit', [ProductController::class, 'edit'])->name('edit');
 
-// 商品編集・更新
-Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
-Route::put('/products/{id}', [ProductController::class, 'update'])->name('products.update');
+    // 商品更新（POST /products/{product}/update）
+    Route::post('/{product}/update', [ProductController::class, 'update'])->name('update');
 
-// 商品削除
-Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
+    // 商品削除（POST /products/{product}/delete）
+    Route::post('/{product}/delete', [ProductController::class, 'destroy'])->name('destroy');
+});
