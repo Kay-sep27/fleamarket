@@ -37,8 +37,7 @@ php artisan serve
 
   ## ER図
 
-![ER図](https://github.com/Kay-sep27/mogitate/blob/main/er.png?raw=true)
-
+![ER図](https://github.com/Kay-sep27/mogitate/blob/main/er.diegram.png?raw=true)
 
   ## URL
 - 開発環境：http://localhost/
