@@ -1,115 +1,44 @@
-# Contact Form Project
-
-## 概要
-お問い合わせフォーム作成の課題プロジェクトです。
+# もぎたてフリマ（商品管理アプリ）
 
 ## 環境構築
 
-1. リポジトリをクローンする
-    ```bash
-    git clone git@github.com:Kay-sep27/contact-form-test.git  
-    cd contact-form-test
-    ```
+このアプリはDocker環境上で動作します。以下は基本的な構築手順です。
 
-2. Dockerコンテナをビルド・起動する
-    ```bash
-    docker compose up -d --build
-    ```
-    * MysQLは、OSによって起動しない場合があるのでそれぞれのPCに合わせて docker-compose.ymlファイルを編集してください。
+```bash
+# 1. リポジトリをクローン
+git clone https://github.com/ユーザー名/リポジトリ名.git
+cd リポジトリ名
 
-3. Laravelコンテナに入る
-    ```bash
-    docker compose exec app bash
-    ```
+# 2. Docker起動
+docker compose up -d
 
-4. Laravelのパッケージをインストール
-    ```bash
-    composer install
-    ```
+# 3. Laravelセットアップ
+docker exec -it mogitate-php-1 bash
 
-5. `.env` ファイルを作成する
-    ```bash
-    cp .env.example .env
-    ```
+# コンテナ内で以下を実行
+composer install
+cp .env.example .env
+php artisan key:generate
+php artisan migrate --seed
+php artisan storage:link
 
-6. アプリケーションキーを生成する
-    ```bash
-    php artisan key:generate
-    ```
-
-7. マイグレーション＆シーディングを実行（ダミーデータ作成）
-    ```bash
-    php artisan migrate --seed
-    ```
-
-8. アプリケーションにアクセス
-    ```
-    http://localhost/
-    ```
-
-## 使用技術
-
-- 言語・フレームワーク：Laravel 8.x / PHP 7.4  
-- インフラ環境：Docker（nginx, PHP, MySQL, phpMyAdmin）  
-- データベース：MySQL 8.0  
-- ライブラリ・パッケージ：
-  - Laravel Fortify（認証機能）
-  - Faker（ダミーデータ生成用）
-  - Bootstrap（モーダル表示）
-- 開発ツール：
-  - VS Code
-  - phpMyAdmin（DBの可視化）
-  - Laravel Artisan（CLI操作）
-
-## 機能一覧
-
-### 一般ユーザー向け
-
-- お問い合わせフォーム入力ページ `/`
-- 確認ページ `/confirm`
-- サンクスページ `/thanks`
-
-### 管理者向け
-
-- 管理画面 `/admin`
-  - 名前・メールアドレス・性別・種類・日付による検索機能
-  - ページネーション（7件ずつ表示）
-  - お問い合わせ詳細をモーダルで表示
-  - お問い合わせの削除（モーダル内で可能）
-  - CSVエクスポート機能 `/export`
-
-### 認証機能（Fortify）
-
-- ユーザー登録 `/register`
-- ログイン `/login`
-- フォームリクエストによるバリデーション  
-  └ 各入力欄の下にエラーメッセージを表示
-
-## ER図
-
-以下は本アプリケーションのER図です：
-
-![ER図](docker/er-diagram.png)
-
-- テーブル名：スネークケース、複数形
-- カラム名：スネークケース
-
-## ダミーデータ
-
-以下のファクトリーでデータを生成：
-
-```php
-\App\Models\Category::factory(5)->create();
-\App\Models\Contact::factory(35)->create();
+# 4. 開発サーバ起動（必要な場合）
+php artisan serve
 ```
 
-## 実装内容
-- お問い合わせフォーム（入力、確認、送信）
-- ユーザー登録・ログイン（Fortify使用）
-- 管理画面（検索、詳細表示、削除）
+## 使用技術（実行環境）
 
-## URL
--開発環境：http://localhost/
+- PHP 7.4.9  
+- Laravel 8.x  
+- MySQL 5.7  
+- Docker / Docker Compose  
+- Bootstrap 5  
+- フロント構成：Bladeテンプレート + CSS（共通 common.css、個別 register.css / edit.css など）
 
-## README更新履歴
-- 2025-07-06 作成
+  ## ER図
+
+![ER図](https://github.com/Kay-sep27/mogitate/blob/main/er.png?raw=true)
+
+
+  ## URL
+- 開発環境：http://localhost/
