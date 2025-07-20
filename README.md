@@ -41,3 +41,9 @@ php artisan serve
 
   ## URL
 - 開発環境：http://localhost/
+| 商品一覧 | /products |
+| 商品詳細 | /products/{productId} |
+| 商品更新 | /products/{productId}/update |
+| 商品登録 | /products/register |
+| 検索 | /products/search |
+| 削除 | /products/{productId}/delete |
