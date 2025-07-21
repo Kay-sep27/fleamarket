@@ -7,9 +7,33 @@ use App\Models\Product;
 use App\Models\Season;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreProductRequest;
+use App\Http\Requests\UpdateProductRequest;
 
 class ProductController extends Controller
 {
+    // 商品一覧表示
+    public function index(Request $request)
+    {
+        $query = Product::query();
+
+        if ($request->filled('keyword')) {
+            $query->where('name', 'like', "%{$request->keyword}%")
+                ->orWhere('description', 'like', "%{$request->keyword}%");
+        }
+
+        if ($request->filled('sort')) {
+            if ($request->sort === 'asc') {
+                $query->orderBy('price', 'asc');
+            } elseif ($request->sort === 'desc') {
+                $query->orderBy('price', 'desc');
+            }
+        }
+
+        $products = $query->paginate(6)->appends($request->all());
+
+        return view('products.index', compact('products'));
+    }
+
     // 商品検索
     public function search(Request $request)
     {
@@ -32,10 +56,9 @@ class ProductController extends Controller
         return view('products.register', compact('seasons'));
     }
 
-    // 商品登録
+    // 商品登録処理
     public function store(StoreProductRequest $request)
     {
-
         $imagePath = $request->hasFile('image')
             ? $request->file('image')->store('images', 'public')
             : null;
@@ -52,70 +75,65 @@ class ProductController extends Controller
         return redirect()->route('products.index')->with('success', '商品を登録しました！');
     }
 
+    // 商品編集フォーム
     public function edit($id)
     {
-    $product = Product::with('seasons')->findOrFail($id);
-    $seasons = Season::all();
+        $product = Product::with('seasons')->findOrFail($id);
+        $seasons = Season::all();
 
-    return view('products.edit', compact('product', 'seasons'));
+        return view('products.edit', compact('product', 'seasons'));
     }
 
-    public function update(Request $request, $id)
+    // 商品更新処理
+    public function update(UpdateProductRequest $request, $id)
+
     {
+
     $product = Product::findOrFail($id);
 
-    $validated = $request->validate([
-        'name' => 'required|string|max:255',
-        'price' => 'required|numeric|between:0,10000',
-        'description' => 'required|string|max:120',
-        'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-        'seasons' => 'required|array',
-        'seasons.*' => 'exists:seasons,id',
-    ]);
-
-    // 画像が新しくアップされたら差し替え
+    // 画像の処理（ある場合のみ）
     if ($request->hasFile('image')) {
-        // 古い画像削除
         if ($product->image) {
             Storage::disk('public')->delete($product->image);
         }
         $product->image = $request->file('image')->store('images', 'public');
     }
 
-    // 更新処理
-    $product->update([
-        'name' => $validated['name'],
-        'price' => $validated['price'],
-        'description' => $validated['description'],
-    ]);
+    // その他のデータ更新
+    $product->name        = $request->name;
+    $product->price       = $request->price;
+    $product->description = $request->description;
 
-    // 画像が更新されていた場合、保存
-    if ($request->hasFile('image')) {
-        $product->save();
-    }
+    // ←ここでまとめて保存
+    $product->save();
 
-
-    // 季節の関連テーブルを更新
-    $product->seasons()->sync($validated['seasons']);
+    // 中間テーブル（季節）も更新
+    $product->seasons()->sync($request->seasons);
 
     return redirect()->route('products.index')->with('success', '商品を更新しました！');
     }
 
-    // 商品削除
-    public function destroy($id)
+
+    // 商品削除処理（DELETE /products/{id}）
+    public function destroy(Request $request, $id)
     {
-        $product = Product::findOrFail($id);
+    $product = Product::findOrFail($id);
 
-        if ($product->image) {
-            Storage::disk('public')->delete($product->image);
-        }
-
-        $product->delete();
-
-        return redirect()->route('products.index')->with('success', '削除しました');
+    // 画像がある場合は削除
+    if ($product->image) {
+        Storage::disk('public')->delete($product->image);
     }
 
-    // 確認画面
+    // 中間テーブル（seasons）も削除（必要なら）
+    $product->seasons()->detach();
+
+    // 本体削除
+    $product->delete();
+
+    return redirect()->route('products.index')->with('success', '削除しました');
+    }
+
+    // 確認画面（登録の確認用）
     public function confirm(Request $request)
     {
         $request->validate([
@@ -139,32 +157,4 @@ class ProductController extends Controller
             'seasonNames' => $seasonNames,
         ]);
     }
-
-    public function index(Request $request)
-    {
-    $query = Product::query();
-
-    if ($request->filled('keyword')) {
-        $query->where('name', 'like', "%{$request->keyword}%")
-            ->orWhere('description', 'like', "%{$request->keyword}%");
-    }
-
-    if ($request->filled('sort')) {
-        if ($request->sort === 'asc') {
-            $query->orderBy('price', 'asc');
-        } elseif ($request->sort === 'desc') {
-            $query->orderBy('price', 'desc');
-        }
-    }
-
-    $products = $query->paginate(6)->appends($request->all());
-
-    return view('products.index', compact('products'));
-    }
-
-    public function show($id)
-    {
-    return redirect()->route('products.edit', $id);
-    }
-
 }

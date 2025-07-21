@@ -4,6 +4,7 @@
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/register.css') }}">
+<link rel="stylesheet" href="{{ asset('css/common.css') }}">
 @endsection
 
 @section('content')
@@ -38,17 +39,28 @@
             @error('image') <p class="error">{{ $message }}</p> @enderror
         </div>
 
-        <!-- 季節 -->
-        <div class="form-group">
-            <label>季節 <span class="required-badge">必須</span><span class="small-label">複数選択可</span></label>
-            <div class="form-group">
-
-    <div class="checkbox-group">
-        <label><input type="checkbox" name="seasons[]" value="1" {{ is_array(old('seasons')) && in_array(1, old('seasons')) ? 'checked' : '' }}> 春</label>
-        <label><input type="checkbox" name="seasons[]" value="2" {{ is_array(old('seasons')) && in_array(2, old('seasons')) ? 'checked' : '' }}> 夏</label>
-        <label><input type="checkbox" name="seasons[]" value="3" {{ is_array(old('seasons')) && in_array(3, old('seasons')) ? 'checked' : '' }}> 秋</label>
-        <label><input type="checkbox" name="seasons[]" value="4" {{ is_array(old('seasons')) && in_array(4, old('seasons')) ? 'checked' : '' }}> 冬</label>
+       <!-- 季節 -->
+<div class="form-group">
+    <label>季節 <span class="required-badge">必須</span><span class="small-label">複数選択可</span></label>
+    <div class="season-group">
+        <label>
+            <input type="checkbox" name="seasons[]" value="1" {{ is_array(old('seasons')) && in_array(1, old('seasons')) ? 'checked' : '' }}>
+            春
+        </label>
+        <label>
+            <input type="checkbox" name="seasons[]" value="2" {{ is_array(old('seasons')) && in_array(2, old('seasons')) ? 'checked' : '' }}>
+            夏
+        </label>
+        <label>
+            <input type="checkbox" name="seasons[]" value="3" {{ is_array(old('seasons')) && in_array(3, old('seasons')) ? 'checked' : '' }}>
+            秋
+        </label>
+        <label>
+            <input type="checkbox" name="seasons[]" value="4" {{ is_array(old('seasons')) && in_array(4, old('seasons')) ? 'checked' : '' }}>
+            冬
+        </label>
     </div>
+
     @error('seasons')
         <p class="error">{{ $message }}</p>
     @enderror

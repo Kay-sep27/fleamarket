@@ -53,7 +53,7 @@
         <div class="products-wrapper">
             @foreach ($products as $product)
             <div class="product-card">
-                <a href="{{ route('products.show', $product->id) }}">
+                <a href="{{ route('products.edit', $product->id) }}">
                 <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}">
                 <div class="product-info">
                     <p>{{ $product->name }}</p>

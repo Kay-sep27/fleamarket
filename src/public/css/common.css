@@ -24,6 +24,15 @@ body {
     color: #FFA500;
 }
 
+.header__inner {
+    margin: 0 auto;
+    padding: 20px 15px;
+    max-width: 1230px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -58,9 +67,9 @@ h1 {
 }
 
 .btn-yellow {
-    background-color: #FFD700;
-    color: #333;
-    padding: 12px 32px;
+    background-color: #FFD700 !important;
+    color: #333 !important;;
+    padding: 12px 32px !important;;
     border-radius: 6px;
     font-weight: bold;
     border: none;
@@ -69,8 +78,8 @@ h1 {
 }
 
 .btn-gray {
-    background-color: #e0e0e0;
-    padding: 12px 32px;
+    background-color: #e0e0e0 !important;;
+    padding: 12px 32px !important;;
     border-radius: 6px;
     font-weight: bold;
     color: #333;
