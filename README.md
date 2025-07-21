@@ -6,7 +6,7 @@
 
 ```bash
 # 1. リポジトリをクローン
-git clone https://github.com/ユーザー名/リポジトリ名.git
+git clone https://github.com/Kay-sep27/mogitate.git
 cd リポジトリ名
 
 # 2. Docker起動
@@ -39,11 +39,14 @@ php artisan serve
 
 ![ER図](https://github.com/Kay-sep27/mogitate/blob/main/er-diagram.png?raw=true)
 
-  ## URL
-- 開発環境：http://localhost/
-| 商品一覧 | /products |
-| 商品詳細 | /products/{productId} |
-| 商品更新 | /products/{productId}/update |
-| 商品登録 | /products/register |
-| 検索 | /products/search |
-| 削除 | /products/{productId}/delete |
+  ## URL一覧（ルーティング）
+
+| 機能       | パス                           |
+|------------|--------------------------------|
+| 商品一覧   | `/products`                    |
+| 商品詳細   | `/products/{productId}`        |
+| 商品登録   | `/products/register`           |
+| 商品編集   | `/products/{productId}/edit`   |
+| 商品更新   | `/products/{productId}/update` |
+| 商品削除   | `/products/{productId}`（DELETE） |
+| 商品検索   | `/products/search`             |
