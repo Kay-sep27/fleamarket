@@ -43,10 +43,11 @@ php artisan serve
 
 | 機能       | パス                           |
 |------------|--------------------------------|
-| 商品一覧   | `/products`                    |
-| 商品詳細   | `/products/{productId}`        |
-| 商品登録   | `/products/register`           |
-| 商品編集   | `/products/{productId}/edit`   |
-| 商品更新   | `/products/{productId}/update` |
-| 商品削除   | `/products/{productId}`（DELETE） |
+| 商品一覧   | http://localhost/products                                        |
+| 商品詳細   | http://localhost/products/{productId}                            |
+| 商品登録   | http://localhost/products/register                               |
+| 商品編集   | http://localhost/products/{productId}/edit                       |
+| 商品更新   | http://localhost/products/{productId}/update （※PUTメソッド）   |
+| 商品削除   | http://localhost/products/{productId} （※DELETEメソッド）       |
+| 商品検索   | http://localhost/products/search                                 |
 | 商品検索   | `/products/search`             |
