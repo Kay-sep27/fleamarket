@@ -50,4 +50,3 @@ php artisan serve
 | 商品更新   | http://localhost/products/{productId}/update （※PUTメソッド）   |
 | 商品削除   | http://localhost/products/{productId} （※DELETEメソッド）       |
 | 商品検索   | http://localhost/products/search                                 |
-| 商品検索   | `/products/search`             |
