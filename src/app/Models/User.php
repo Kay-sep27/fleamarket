@@ -21,6 +21,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'profile_image',
+        'zip',
+        'address',
+        'building',
     ];
 
     /**
@@ -41,4 +45,74 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function items()
+    {
+        return $this->hasMany(Item::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
+
+    public function purchases()
+    {
+        return $this->hasMany(Purchase::class);
+    }
+}
+```
+
+// src/app/Models/Item.php
+```php
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Item extends Model
+{
+    use HasFactory;
+
+    protected $fillable = [
+        'user_id',
+        'name',
+        'brand',
+        'description',
+        'price',
+        'img_url',
+        'condition',
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'category_item');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
+
+    public function purchase()
+    {
+        return $this->hasOne(Purchase::class);
+    }
 }

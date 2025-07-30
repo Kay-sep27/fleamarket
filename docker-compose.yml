@@ -22,7 +22,7 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: fleamarket_db
+      MYSQL_DATABASE: fleamarket
       MYSQL_USER: user
       MYSQL_PASSWORD: password
     ports:
@@ -39,7 +39,7 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./:/var/www/html
+      - ./src:/var/www/html
       - ./docker/nginx/conf.d:/etc/nginx/conf.d
     depends_on:
       - app
