@@ -7,56 +7,55 @@ use App\Actions\Fortify\ResetUserPassword;
 use App\Actions\Fortify\UpdateUserPassword;
 use App\Actions\Fortify\UpdateUserProfileInformation;
 use App\Http\Requests\LoginRequest;
+use App\Models\User;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
 use Laravel\Fortify\Fortify;
 
 class FortifyServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     */
     public function register(): void
     {
-        //
+        // 特に登録するサービスはなし
     }
 
-    /**
-     * Bootstrap any application services.
-     */
     public function boot(): void
     {
-        // Registration view
-        Fortify::registerView(function () {
-            return view('auth.register');
-        });
-        // Use action for creating new users
+        // 会員登録画面のビュー
+        Fortify::registerView(fn () => view('auth.register'));
         Fortify::createUsersUsing(CreateNewUser::class);
 
-        // Login view
-        Fortify::loginView(function () {
-            return view('auth.login');
-        });
-        // Use custom LoginRequest for authentication
+        // ログイン画面のビュー
+        Fortify::loginView(fn () => view('auth.login'));
+
+        // ログイン処理
         Fortify::authenticateUsing(function (LoginRequest $request) {
-            return app(\Laravel\Fortify\Http\Controllers\AuthenticatedSessionController::class)
-                ->store($request);
+            $user = User::where('email', $request->email)->first();
+            if ($user && Hash::check($request->password, $user->password)) {
+                return $user;
+            }
+            throw ValidationException::withMessages([
+                'email' => __('auth.failed'),
+            ]);
         });
 
-        // Profile & password update
+        // プロフィール・パスワード更新処理
         Fortify::updateUserProfileInformationUsing(UpdateUserProfileInformation::class);
         Fortify::updateUserPasswordsUsing(UpdateUserPassword::class);
         Fortify::resetUserPasswordsUsing(ResetUserPassword::class);
 
-        // Rate limiting
+        // ログイン試行回数の制限
         RateLimiter::for('login', function (Request $request) {
-            $throttleKey = Str::transliterate(Str::lower($request->input(Fortify::username())).'|'.$request->ip());
-            return Limit::perMinute(5)->by($throttleKey);
+            $key = Str::transliterate(Str::lower($request->input(Fortify::username())) . '|' . $request->ip());
+            return Limit::perMinute(5)->by($key);
         });
 
+        // 2要素認証などのレート制限（必要であれば）
         RateLimiter::for('two-factor', function (Request $request) {
             return Limit::perMinute(5)->by($request->session()->get('login.id'));
         });

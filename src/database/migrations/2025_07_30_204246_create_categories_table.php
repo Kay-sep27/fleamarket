@@ -10,7 +10,7 @@ class CreateCategoriesTable extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
+            $table->string('name')->unique(); // 一意制約付き
             $table->timestamps();
         });
     }

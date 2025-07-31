@@ -15,7 +15,7 @@ class Item extends Model
         'brand',
         'description',
         'price',
-        'img_url',
+        'image', // ← 修正されたカラム名
         'condition',
     ];
 
