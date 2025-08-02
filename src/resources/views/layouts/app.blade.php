@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+  <link rel="stylesheet" href="{{ asset('css/login.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/common.css') }}">
+
+  <header class="header">
+    <div class="header__inner">
+        <a href="{{ url('/') }}" class="logo-link">
+            <img src="{{ asset('storage/images/logo.svg') }}" alt="サイトロゴ" class="logo-img">
+        </a>
+    </div>
+  </header>
   <link rel="stylesheet" href="{{ asset('css/index.css') }}">
 
   <meta charset="UTF-8">

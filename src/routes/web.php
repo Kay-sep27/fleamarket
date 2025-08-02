@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\Auth\LoginController;
 
 // ホームリダイレクト → 商品一覧へ
 Route::get('/', fn() => redirect()->route('items.index'));
@@ -26,3 +27,6 @@ Route::put('/items/{item}', [ItemController::class, 'update'])->name('items.upda
 
 // 商品削除処理
 Route::delete('/items/{item}', [ItemController::class, 'destroy'])->name('items.destroy');
+
+// ログインフォーム
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
