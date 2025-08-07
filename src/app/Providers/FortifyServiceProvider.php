@@ -6,8 +6,8 @@ use App\Actions\Fortify\CreateNewUser;
 use App\Actions\Fortify\ResetUserPassword;
 use App\Actions\Fortify\UpdateUserPassword;
 use App\Actions\Fortify\UpdateUserProfileInformation;
-use App\Http\Requests\LoginRequest;
 use App\Models\User;
+use App\Http\Requests\RegisterUserRequest;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -16,6 +16,9 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use Laravel\Fortify\Fortify;
+use Laravel\Fortify\Features;
+use Laravel\Fortify\Http\Requests\LoginRequest;
+
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -63,5 +66,12 @@ class FortifyServiceProvider extends ServiceProvider
         // ログイン画面
         Fortify::loginView(fn () => view('auth.login'));
 
+        // 認証メール送信、の画面
+        Fortify::verifyEmailView(function () {
+        return view('auth.verify-email');
+        });
+
+        // 認証メールバリデーション
+        Fortify::createUsersUsing(CreateNewUser::class);
     }
 }

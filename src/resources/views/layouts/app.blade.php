@@ -3,6 +3,8 @@
 <head>
   <link rel="stylesheet" href="{{ asset('css/login.css') }}">
   <link rel="stylesheet" href="{{ asset('css/common.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/register.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/verify.css') }}">
 
   <header class="header">
     <div class="header__inner">
